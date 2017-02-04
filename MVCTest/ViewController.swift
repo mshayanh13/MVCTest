@@ -8,18 +8,32 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+//class someStuff { } //BAD - Do in model
 
+class ViewController: UIViewController {
+    @IBOutlet weak var fullNameLbl: UILabel!
+//    @IBOutlet weak var bobbyImg: UIImageView!
+    @IBOutlet weak var renameField: UITextField!
+
+    let person = Person(first: "John", last: "Hancock")
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        fullNameLbl.text = person.fullName
+        
+//        fullNameLbl.text = "\(person.firstName) \(person.lastName)" //Bad -- manipulated data for the view
+//        bobbyImg.layer.cornerRadius = 5.0                         //Don't manipulate views
+//        bobbyImg.clipsToBounds = true
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func renameBtnPressed(_ sender: Any) {
+        if let txt = renameField.text {
+            person.firstName = txt
+            fullNameLbl.text = person.fullName
+        }
     }
-
 
 }
 
